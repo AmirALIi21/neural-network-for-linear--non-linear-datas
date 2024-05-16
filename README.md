@@ -5,7 +5,7 @@ use for those sections .
 in line 19 we have : print(x_train.shape,x_test.shape,y_train.shape,y_test.shape)
 which show's us the shape of our data in this format :for example:  (69998,16)
 so if you have a extra dimension it might look like :(69998, 16, 1)
-although you can give the data dimension you can that in lines 22 ,23.
+although you can give the data extra dimension  in lines 22 ,23.
 in line 27 : inputs=Input(shape=(7,)) for the example I said befor I put 16 instead of 7 (the second number of the print in line 19).
 
 at last you change batch size and the epoch as you wish 
