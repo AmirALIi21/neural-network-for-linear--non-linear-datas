@@ -8,23 +8,25 @@ from keras.layers import Dense , Input , Dropout
 from keras.models import Model
 np.random.seed(42)
 
-data = pd.read_excel('/content/Real estate valuation data set.xlsx')
-data=data.dropna()#delets the null elements
+data = pd.read_excel('path/to/your/data.xlsx') # use "read_csv" if the data file format is ".csv"
+data=data.dropna() #delets the null elements
 
 #input and output
-x=data.drop('Y house price of unit area', axis = 1)
-y=data['Y house price of unit area'].values
+x=data.drop('the_target_you_want_to_predict_by_it', axis = 1)
+y=data['the_target_you_want_to_predict_by_it'].values
 xs=scale(x)
 
 print(x_train.shape,x_test.shape,y_train.shape,y_test.shape)
-#reshapeing
-x_train=x_train.reshape(-1,7,1)#-1 : we put it except of puting 717 for example
-x_test=x_test.reshape(-1,7,1)# 1 : is for dimensions (for video or pic)
 
+#reshapeing
+#x_train=x_train.reshape(-1,7,1)
+#x_test=x_test.reshape(-1,7,1)#  1 : is for dimensions (for video or pic)
 #here we use with no deepness cause we do not need more 
 
-inputs=Input(shape=(7,))#input layer
+#input layer 
+inputs=Input(shape=(7,)) #except 7 put the second value of the last print function which is like (Fn,Sn). use the "Sn"
 x= inputs
+#you can use more or less layers
 x= Dense(256,activation='relu')(x)#1st hidden layer (number_of_perceptrons,activation_function)
 x= Dense(512,activation='relu')(x)#2nd layer
 x= Dense(1024,activation='relu')(x)#3rd layer
@@ -39,7 +41,7 @@ x= Dense(256,activation='relu')(x)#11th layer
 output=Dense(1,activation='linear')(x)#output layer 
 model=Model(inputs,output)
 
-model.compile(optimizer='rmsprop',loss='mse')
+model.compile(optimizer='rmsprop',loss='mse') 
 model.fit(x_train,y_train,batch_size=1000, epochs=200)
 
 loss=model.evaluate(x_test,y_test,batch_size=10)
